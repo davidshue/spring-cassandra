@@ -18,7 +18,7 @@ import com.datastax.driver.core.Session
 @ActiveProfiles("bigdata")
 class BigDataTest {
 
-	static final String NOTIFICATION_TABLE = "notification"
+	static final String MESSAGE_TABLE = "message"
 	
 	@Autowired
 	private Session session
