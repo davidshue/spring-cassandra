@@ -15,11 +15,14 @@ import org.springframework.data.cassandra.core.CassandraOperations
 import org.springframework.data.cassandra.core.CassandraTemplate
 import org.springframework.data.cassandra.mapping.BasicCassandraMappingContext
 import org.springframework.data.cassandra.mapping.CassandraMappingContext
+import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories
 
 import com.datastax.driver.core.Cluster
 import com.datastax.driver.core.Session
 
+
 @Configuration
+@EnableCassandraRepositories(basePackages = ["com.mentat.bigdata.repo" ])
 class AppConfig {
 	@Bean
 	PropertyPlaceholderConfigurer configProperties() {

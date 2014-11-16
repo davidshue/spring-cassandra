@@ -12,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
 import com.datastax.driver.core.Session
+import com.mentat.bigdata.model.MessagePK
+import com.mentat.bigdata.repo.MessageRepository
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=AppConfig.class)
@@ -22,6 +24,9 @@ class BigDataTest {
 	
 	@Autowired
 	private Session session
+	
+	@Autowired
+	MessageRepository repo
 
 	@Autowired
 	private CassandraOperations cassandraOps
@@ -32,6 +37,10 @@ class BigDataTest {
 	void testTimeUUID() {
 		UUID id = UUIDGen.timeUUID
 		println 'time: ' + new Date(UUIDGen.getAdjustedTimestamp(id))
+		
+		println 'findOne ' + repo.findOne(new MessagePK(userId: 123, id: id))
+		
+		println 'totalUnread ' + repo.getTotalUnread(123)
 	}
 
 
