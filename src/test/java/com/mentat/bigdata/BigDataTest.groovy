@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
 import com.datastax.driver.core.Session
+import com.mentat.bigdata.model.Message
 import com.mentat.bigdata.model.MessagePK
 import com.mentat.bigdata.repo.MessageRepository
 
@@ -38,10 +39,26 @@ class BigDataTest {
 		UUID id = UUIDGen.timeUUID
 		println 'time: ' + new Date(UUIDGen.getAdjustedTimestamp(id))
 		
+		List<Message> messages = repo.findAll()
+
 		println 'findOne ' + repo.findOne(new MessagePK(userId: 123, id: id))
 		
 		println 'totalUnread ' + repo.getTotalUnread(123)
 	}
 
+	@Test
+	void testInsert() {
+		int userId = 123
+		UUID id = UUIDGen.timeUUID
+		MessagePK pk = new MessagePK(userId: userId, id: id)
+		Message msg = new Message(pk:pk,
+			creatorId: 200,
+			//creator: [first_name: 'david', last_name: 'smith'],
+			body: 'test message',
+			lastReadDate: new Date()
+			)
+		
+		repo.save(msg)
+	}
 
 }

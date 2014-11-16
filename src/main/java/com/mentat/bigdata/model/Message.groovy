@@ -11,12 +11,15 @@ import org.springframework.data.cassandra.mapping.Table
 @ToString(includeNames=true)
 @Table
 @EqualsAndHashCode
-public class Message {
+class Message {
 	@PrimaryKey
 	MessagePK pk
 	
 	@Column('creator_id')
 	int creatorId
+	
+	@Column('creator')
+	def creator
 	
 	String body
 	

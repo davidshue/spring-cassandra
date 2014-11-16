@@ -1,5 +1,7 @@
 package com.mentat.bigdata.repo;
 
+import java.util.List;
+
 import org.springframework.data.repository.Repository;
 
 import com.mentat.bigdata.model.Message;
@@ -13,4 +15,6 @@ public interface MessageRepository extends Repository<Message, MessagePK>, Messa
 	boolean exists(MessagePK id);
 	
 	void delete(MessagePK id);
+	
+	List<Message> findAll();
 }
